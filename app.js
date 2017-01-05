@@ -45,6 +45,25 @@ app.use(require('node-sass-middleware')({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+///////////////// PASSPORT //////////////////////
+app.use(session({ secret: "my secret...",
+  resave: true,
+  saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+var passportConfigFunction = require('./config/passport/passport');
+passportConfigFunction(passport);
+
+
+// This middleware will allow us to use the currentUser in our views and routes.
+app.use(function (req, res, next) {
+  global.currentUser = req.user;
+  next();
+});
+////////////////////////////////////////////////
+
 app.use('/', index);
 app.use('/users', users);
 
