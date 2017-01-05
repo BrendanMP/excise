@@ -4,12 +4,33 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var session = require('express-session');
+var flash = require('connect-flash');
+var mongoose = require('mongoose');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var signup = require('./routes/signup');
 
 var app = express();
+
+/////////////////// Connect to database  /////////////////////////////
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI);
+}
+else {
+  mongoose.connect('mongodb://localhost/exciser');
+}
+mongoose.connection.on('error', function(err) {
+      console.error('MongoDB connection error: ' + err);
+      process.exit(-1);
+    }
+);
+mongoose.connection.once('open', function() {
+  console.log("Mongoose has connected to MongoDB!");
+});
+///////////////////////////////////////////////////////////////////////
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +49,25 @@ app.use(require('node-sass-middleware')({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+///////////////// PASSPORT //////////////////////
+app.use(session({ secret: "my secret...",
+  resave: true,
+  saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+var passportConfigFunction = require('./config/passport/passport');
+passportConfigFunction(passport);
+
+
+// This middleware will allow us to use the currentUser in our views and routes.
+app.use(function (req, res, next) {
+  global.currentUser = req.user;
+  next();
+});
+////////////////////////////////////////////////
 
 app.use('/', index);
 app.use('/signup', signup);
