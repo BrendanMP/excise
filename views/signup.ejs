@@ -6,46 +6,47 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
+<div class="container">
+    <section class="sign-up">
+        <article class="sign-up__page">
+            <h3>Find Your Business</h3>
+            <hr class="mb-2" />
+            <label for="">Enter Your Business Name</label>
+            <div class="form-group">
+                <input type="text"
+                       id="place-finder"
+                       class="form-control"
+                       onFocus="geolocate()"
+                       placeholder="Jimmy's Bar and Grill"/>
+            </div>
+            <button class="btn btn-primary btn-block">Next</button>
+        </article>
 
-<section class="sign-up">
-    <article class="sign-up__page">
-        <h3>Find Your Business</h3>
-        <hr class="mb-2" />
-        <label for="">Enter Your Business Name</label>
-        <div class="form-group">
-            <input type="text"
-                   id="place-finder"
-                   class="form-control"
-                   onFocus="geolocate()"
-                   placeholder="Jimmy's Bar and Grill"/>
-        </div>
-        <button class="btn btn-primary">Next</button>
-    </article>
+        <hr class="mt-3"/>
 
-    <hr class="mt-3"/>
-
-    <div id="response">
-        <h5 class="mb-1 mt-3">Response</h5>
-        <div class="form-group">
-            <input class="form-control" id="street_number" disabled="true" placeholder="Street Number">
+        <div id="response">
+            <h5 class="mb-1 mt-3">Response</h5>
+            <div class="form-group">
+                <input class="form-control" id="street_number" disabled="true" placeholder="Street Number">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="route" disabled="true" placeholder="Street Name">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="locality" disabled="true" placeholder="City">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="administrative_area_level_1" disabled="true" placeholder="State">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="postal_code" disabled="true" placeholder="Postal Code">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="administrative_area_level_2" disabled="true" placeholder="County">
+            </div>
         </div>
-        <div class="form-group">
-            <input class="form-control" id="route" disabled="true" placeholder="Street Name">
-        </div>
-        <div class="form-group">
-            <input class="form-control" id="locality" disabled="true" placeholder="City">
-        </div>
-        <div class="form-group">
-            <input class="form-control" id="administrative_area_level_1" disabled="true" placeholder="State">
-        </div>
-        <div class="form-group">
-            <input class="form-control" id="postal_code" disabled="true" placeholder="Postal Code">
-        </div>
-        <div class="form-group">
-            <input class="form-control" id="administrative_area_level_2" disabled="true" placeholder="County">
-        </div>
-    </div>
-</section>
+    </section>
+</div>
 
 <script src="/javascripts/places-autocomplete.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-c694rNKZMqtPurXswPTaewv9OZb035E&libraries=places&callback=initAutocomplete" async defer></script>
