@@ -1,6 +1,6 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../../models/userModel');
-var GoogleCreds = require('../../secrets');
+var GoogleCreds = require('./passport_secrets');
 
 var strategy = new GoogleStrategy({
 		clientID: GoogleCreds.googleClientId,
