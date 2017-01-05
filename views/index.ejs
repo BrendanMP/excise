@@ -2,10 +2,30 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+    <nav class="navbar navbar-light bg-faded">
+      <div class="container">
+        <a class="navbar-brand" href="/">Exciser</a>
+        <ul class="nav navbar-nav float-xs-right">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Create Account</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container pt-3 pb-3">
+      <h1><%= title %></h1>
+      <p>Welcome to <%= title %></p>
+    </div>
+
+
   </body>
 </html>
