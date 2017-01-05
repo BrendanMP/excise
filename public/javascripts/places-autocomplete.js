@@ -29,6 +29,10 @@ function fillInAddress() {
             document.getElementById(addressType).value = val;
         }
     }
+    document.getElementById('business_name').value = place.name;
+    document.getElementById('business_name').disabled = false;
+
+    document.getElementById('place-finder').value = place.name;
 }
 
 function geolocate() {
