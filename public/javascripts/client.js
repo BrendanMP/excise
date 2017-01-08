@@ -1,4 +1,4 @@
-const app = angular.module('excise', ['ui.router']);
+const app = angular.module('excise', ['ui.router','google.places']);
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
@@ -20,7 +20,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/signup',
             templateUrl: '/templates/signup.html',
             controller: 'signupCtrl',
-            controllerAs: '$ctrl'
+            controllerAs: '$ctrl',
         });
     $urlRouterProvider.otherwise("/");
     // $locationProvider.html5Mode({ enabled: true, requireBase: false });
@@ -39,4 +39,9 @@ app.controller('loginCtrl', function() {
 app.controller('signupCtrl', function() {
     this.title = 'Sign Up';
     console.log('sign up is here');
+
+    this.place = null;
+    this.autocompleteOptions = {
+        types: ['establishment']
+    }
 });
