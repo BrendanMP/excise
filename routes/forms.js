@@ -4,7 +4,13 @@ var Form = require('../models/generatedFormModel');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-	res.send('respond with a resource');
+	Form.find({}).sort('-createdAt')
+		.then(function(forms) {
+			res.json({ forms: forms });
+		})
+		.catch(function(err) {
+			return next(err);
+		});
 });
 
 module.exports = router;

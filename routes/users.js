@@ -4,8 +4,19 @@ var User = require('../models/userModel');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  User.find({}).sort('-createdAt')
+      .then(function(users) {
+        res.json({ users: users });
+      })
+      .catch(function(err) {
+        return next(err);
+      });
 });
+
+
+
+
+
 
 module.exports = router;
 

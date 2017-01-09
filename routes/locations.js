@@ -4,7 +4,13 @@ var Location = require('../models/locationModel');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Express' });
+	Location.find({}).sort('-createdAt')
+		.then(function(locations) {
+			res.json({ locations: locations });
+		})
+		.catch(function(err) {
+			return next(err);
+		});
 });
 
 module.exports = router;
