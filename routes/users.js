@@ -13,7 +13,29 @@ router.get('/', function(req, res, next) {
       });
 });
 
+// SHOW
+// return data for a single Location as JSON
+router.get('/:id', function(req, res, next) {
+  User.findById(req.params.id)
+      .then(function(user) {
+        if (!user) return next(makeError(res, 'Document not found', 404));
+        res.json({ users: user });
+      })
+      .catch(function(err) {
+        return next(err);
+      });
+});
 
+//CREATE
+router.post('/', function(req, res, next) {
+  User.create(req.body)
+      .then(function(savedUser) {
+        res.json({ user: savedUser });
+      })
+      .catch(function(err) {
+        return next(err);
+      });
+});
 
 
 
