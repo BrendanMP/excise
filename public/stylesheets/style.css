@@ -5161,6 +5161,45 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 .custom-prediction-label {
   font-style: italic; }
 
+.homepage__hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30rem;
+  color: #fff;
+  text-align: center; }
+  .homepage__hero p {
+    font-style: italic;
+    margin-bottom: 2rem; }
+
+.homepage__three-up {
+  margin: 4rem 0 3rem;
+  text-align: center; }
+  .homepage__three-up .icon {
+    height: 150px;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #0275d8;
+    margin-bottom: 2rem;
+    border-radius: 150px; }
+  .homepage__three-up article {
+    margin-bottom: 1rem; }
+  .homepage__three-up p {
+    font-size: 0.875rem;
+    color: #818a91; }
+
+.homepage__footer {
+  padding: 2rem 0 4rem;
+  background: #373a3c;
+  color: #fff; }
+  .homepage__footer .about p {
+    max-width: 80%; }
+  .homepage__footer a {
+    color: rgba(255, 255, 255, 0.8); }
+    .homepage__footer a:hover {
+      color: #ffffff; }
+
 * {
   box-sizing: border-box; }
 
