@@ -1,30 +1,60 @@
-<article class="sign-up__page">
-    <h3 class="mb-2">Find Your Business</h3>
-    <div class="form-group">
-
-        <input placeholder="Enter your business name."
-               class="form-control"
-               g-places-autocomplete
-               ng-model="place"/>
-    </div>
-    <button class="btn btn-primary btn-block">Next</button>
-</article>
+<h1>{{ $ctrl.title }}</h1>
 
 <hr class="mt-3"/>
 
-<h5>Result:</h5>
-<div class="form-group">
-    <input class="form-control" placeholder="Business Name" value="{{ place.name }}">
+<div class="col-md-6 col-md-offset-3">
+    <form name="form" ng-submit="$ctrl.signup()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+            <label for="email">Email</label>
+            <input type="text" name="signup_email" id="email" class="form-control" ng-model="$ctrl.user.signup_email" required />
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password">Password</label>
+            <input type="password" name="signup_password" id="password" class="form-control" ng-model="$ctrl.user.signup_password" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password2">Confirm Password</label>
+            <input type="password" name="password2" id="password2" class="form-control" ng-model="$ctrl.password2" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || $ctrl.dataLoading" class="btn btn-primary">Signup</button>
+        </div>
+    </form>
 </div>
 
-<div class="form-group">
-    <input class="form-control" placeholder="Business Address" value="{{ place.formatted_address }}">
-</div>
 
-<div class="form-group">
-    <input class="form-control" placeholder="County" value="{{ place.address_components[4].long_name }}">
-</div>
+<!--<article class="sign-up__page">-->
+    <!--<h3 class="mb-2">Find Your Business</h3>-->
+    <!--<div class="form-group">-->
+
+        <!--<input placeholder="Enter your business name."-->
+               <!--class="form-control"-->
+               <!--g-places-autocomplete-->
+               <!--ng-model="place"/>-->
+    <!--</div>-->
+    <!--<button class="btn btn-primary btn-block">Next</button>-->
+<!--</article>-->
+
+<!--<hr class="mt-3"/>-->
+
+<!--<h5>Result:</h5>-->
+<!--<div class="form-group">-->
+    <!--<input class="form-control" placeholder="Business Name" value="{{ place.name }}">-->
+<!--</div>-->
+
+<!--<div class="form-group">-->
+    <!--<input class="form-control" placeholder="Business Address" value="{{ place.formatted_address }}">-->
+<!--</div>-->
+
+<!--<div class="form-group">-->
+    <!--<input class="form-control" placeholder="County" value="{{ place.address_components[4].long_name }}">-->
+<!--</div>-->
 
 
-<small><pre>{{place | json}}</pre></small>
+<!--<small><pre>{{place | json}}</pre></small>-->
+
+
 
