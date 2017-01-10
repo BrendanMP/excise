@@ -71,11 +71,11 @@ app.controller('loginCtrl', function() {
 });
 
 app.controller('signupCtrl', function($location,userService) {
-    vm = this;
+    var vm = this;
     vm.title = 'Sign Up';
 
     vm.signup = function () {
-        console.log('sign up is here', vm.user);
+        console.log('sign up is alive', vm.user);
         userService.signup(vm.user);
         $location.url('/dashboard');
     }
@@ -86,6 +86,21 @@ app.controller('signupCtrl', function($location,userService) {
     }
 });
 
+app.controller('loginCtrl', function ($location, userService) {
+    var vm = this;
+    vm.title = 'Login';
+
+    vm.login = function () {
+        console.log('login is alive', vm.user);
+        userService.login(vm.user);
+        $location.url('/dashboard');
+    }
+})
+
 app.controller('dashboardCtrl', function () {
-    this.title = 'Dashboard';
+    var vm = this;
+    vm.title = 'Dashboard';
+
+    console.log(vm.user);
+
 })
