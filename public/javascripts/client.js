@@ -22,6 +22,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'signupCtrl',
             controllerAs: '$ctrl',
         });
+
     $stateProvider
         .state('dashboard', {
             url: '/dashboard',
@@ -29,6 +30,16 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'dashboardCtrl',
             controllerAs: '$ctrl',
         });
+
+    $stateProvider
+        .state('profile', {
+            url: '/profile',
+            templateUrl: '/templates/profile.html',
+            controller: 'profileCtrl',
+            controllerAs: '$ctrl',
+        });
+
+
     $urlRouterProvider.otherwise("/");
     // $locationProvider.html5Mode({ enabled: true, requireBase: false });
 });
@@ -86,6 +97,7 @@ app.controller('signupCtrl', function($location,userService) {
     }
 });
 
+
 app.controller('loginCtrl', function ($location, userService) {
     var vm = this;
     vm.title = 'Login';
@@ -104,3 +116,8 @@ app.controller('dashboardCtrl', function () {
     console.log(vm.user);
 
 })
+
+app.controller('profileCtrl', function() {
+    this.title = 'Profile';
+    console.log('Profile is here');
+});
