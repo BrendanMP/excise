@@ -31,6 +31,7 @@
 // 					newUser.google.token = token;
 // 					newUser.google.name = profile.displayName;
 // 					newUser.google.email = profile.emails[0].value; // pull the first email
+//					newUser.google.image = profile._json.image.url;
 //
 // 					// save the user
 // 					newUser.save(function (err) {
