@@ -1,3 +1,37 @@
-<h1>{{ $ctrl.title }}</h1>
+<div class="container">
+    <h2 class="mt-2">{{ $ctrl.title }}</h2>
 
-<h1> You made it to the dashboard!!</h1>
+    <hr class="mb-2">
+
+    <h4>Locations</h4>
+
+    <hr>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-block">
+                    <div class="card-title"><h5>Location 1</h5></div>
+                    <address>
+                        Address Line 1 <br>
+                        Address Line 2 <br>
+                        <span class="text-muted">404-333-444</span>
+                    </address>
+                    <hr>
+                    <div class="form-inline">
+                        <label for="userLocation-1">Gross Alcohol Sales</label>
+                        <input type="number" id="userLocation-1" class="form-control" placeholder="Total">
+                        <button class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <hr>
+    <button class="btn btn-success btn-lg">Pay Now</button>
+</div>
+
