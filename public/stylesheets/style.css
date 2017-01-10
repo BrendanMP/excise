@@ -5785,7 +5785,13 @@ label {
   .btn-group-flex .btn {
     flex: 1 1 auto; }
 
-.modal-footer {
-  justify-content: space-between; }
+.custom-select {
+  width: 100%; }
+
+.text-link {
+  color: #0275d8;
+  cursor: pointer; }
+  .text-link:hover {
+    color: #0267bf; }
 
 /*# sourceMappingURL=style.css.map */

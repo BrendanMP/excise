@@ -107,17 +107,36 @@ app.controller('loginCtrl', function ($location, userService) {
         userService.login(vm.user);
         $location.url('/dashboard');
     }
-})
+});
 
-app.controller('dashboardCtrl', function () {
-    var vm = this;
+app.controller('dashboardCtrl', function ($scope, $http) {
+    var vm = $scope;
     vm.title = 'Dashboard';
 
     console.log(vm.user);
 
-})
+});
 
 app.controller('profileCtrl', function() {
     this.title = 'Profile';
     console.log('Profile is here');
+});
+
+
+app.controller('FormCtrl', function ($scope, $http, $location) {
+
+    $scope.data = {
+        estName: 'Default',
+        reportMonthYear: '01/2017',
+        grossSales: 0,
+    };
+
+    $scope.submitForm = function() {
+        $http.post('/forms/make/', JSON.stringify($scope.data))
+            .then(
+                console.log('submitted')
+            ).catch(function (err) {
+            console.log(err)
+        });
+    };
 });
