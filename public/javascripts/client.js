@@ -112,6 +112,7 @@ app.controller('signupCtrl', function($http,$location) {
     var vm = this;
     vm.title = 'Sign Up';
 
+
     vm.signup = function () {
         var url = 'http://localhost:3000/signup';
         var user = vm.user;
@@ -127,14 +128,11 @@ app.controller('signupCtrl', function($http,$location) {
                     $location.path('/login');
                 } //error
             )
-
     };
-
-    
 });
 
-app.controller('dashboardCtrl', function () {
-    var vm = this;
+app.controller('dashboardCtrl', function ($scope, $http) {
+    var vm = $scope;
     vm.title = 'Dashboard';
 
     console.log(vm.user);
@@ -156,4 +154,23 @@ app.controller('profileCtrl', function(userService) {
         .catch(function (err) {
             console.log("profileCtrl userService error: ",err);
         })
+});
+
+
+app.controller('FormCtrl', function ($scope, $http, $location) {
+
+    $scope.data = {
+        estName: 'Default',
+        reportMonthYear: '01/2017',
+        grossSales: 0,
+    };
+
+    $scope.submitForm = function() {
+        $http.post('/forms/make/', JSON.stringify($scope.data))
+            .then(
+                console.log('submitted')
+            ).catch(function (err) {
+            console.log(err)
+        });
+    };
 });
