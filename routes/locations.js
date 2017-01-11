@@ -3,7 +3,7 @@ var router = express.Router();
 var Location = require('../models/locationModel');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', authenticateAPI, function(req, res, next) {
 	Location.find({}).sort('-createdAt')
 		.then(function(locations) {
 			res.json({ locations: locations });
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 // SHOW
 // return data for a single Location as JSON
-router.get('/:id', function(req, res, next) {
+router.get('/:id', authenticateAPI, function(req, res, next) {
 	Location.findById(req.params.id)
 		.then(function(location) {
 			if (!location) return next(makeError(res, 'Document not found', 404));
@@ -27,7 +27,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 // CREATE
-router.post('/', function(req, res, next) {
+router.post('/', authenticateAPI, function(req, res, next) {
 	Location.create(req.body)
 		.then(function(savedLocation) {
 			res.json({ location: savedLocation });
@@ -40,6 +40,14 @@ router.post('/', function(req, res, next) {
 
 module.exports = router;
 
+function authenticateAPI(req, res, next) {
+	if(!req.isAuthenticated()) {
+		res.redirect(401, "/");
+	}
+	else {
+		next();
+	}
+}
 
 function makeError(res, message, status) {
 	res.statusCode = status;
