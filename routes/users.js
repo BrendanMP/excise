@@ -37,9 +37,10 @@ router.get('/:id', authenticateAPI, function(req, res, next) {
       });
 });
 
-//CREATE
-router.post('/', authenticateAPI, function(req, res, next) {
-  User.create(req.body)
+//Update
+router.post('/:id', authenticateAPI, function(req, res, next) {
+    console.log("In update user router:",req.body);
+  User.findByIdAndUpdate({_id: req.body._id}, req.body)
       .then(function(savedUser) {
         res.json({ user: savedUser });
       })

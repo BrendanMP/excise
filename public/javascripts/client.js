@@ -44,13 +44,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 });
 
 // //////////////// SERVICES //////////////////////
-// app.service('authService', function($http) {
-//     console.log('authService is alive!');
-//     this.getAuthorizedUser = function () {
-//         return $http.get('/user');
-//     }
-// });
-
 app.service('userService', function ($http) {
     console.log('userService is alive!');
     this.authUser = function () {
@@ -62,12 +55,11 @@ app.service('userService', function ($http) {
     this.getUser = function () {
         return $http.get('/api/users', id);
     }
-    this.updateUser = function () {
-        return $http.post('/api/users', id);
+    this.updateUser = function (user) {
+        return $http.post('/api/users/:id', user, user._id);
     }
 
-
-})
+});
 
 app.service('locationService', function ($http) {
     console.log('locationService is alive!');
@@ -88,10 +80,11 @@ app.service('locationService', function ($http) {
 app.controller('navCtrl', function (userService) {
     var vm = this;
     vm.user = {};
+
     userService.authUser()
         .then(function (res) {
             vm.user = res.data;
-            console.log(vm.user);
+            console.log("from Nav Ctrl: ", vm.user);
         })
         .catch(function (err) {
             console.log("navCtrl userService error: ",err);
@@ -178,8 +171,15 @@ app.controller('profileCtrl', function(userService) {
         })
 
     vm.updateUser = function () {
-
+        userService.updateUser(vm.user)
+            .then( function (res) {
+                console.log("User Updated", res)
+            })
+            .catch(function (err) {
+                alert('Error: '+ err);
+            })
     }
+
 });
 
 
