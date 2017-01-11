@@ -2,15 +2,25 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/userModel');
 
-router.use('/', function(req, res, next) {
-    if(!req.user){
+// router.use('/', function(req, res, next) {
+//     if(!req.user){
+//         res.redirect('/');
+//     }
+//     next();
+// })
+
+function authenticate(req, res, next) {
+    if(!req.isAuthenticated()) {
+        req.flash('error', 'Oops! You are not logged in. Please sign up or login to continue.');
         res.redirect('/');
     }
-    next();
-})
+    else {
+        next();
+    }
+}
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', authenticate, function(req, res, next) {
   User.find({}).sort('-createdAt')
       .then(function(users) {
         res.json({ users: users });
@@ -20,8 +30,9 @@ router.get('/', function(req, res, next) {
       });
 });
 
+
+
 // SHOW
-// return data for a single Location as JSON
 router.get('/:id', function(req, res, next) {
   User.findById(req.params.id)
       .then(function(user) {
