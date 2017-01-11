@@ -48,7 +48,7 @@ router.get('/user', authenticate, function(req, res, next) {
     res.send(data);
 });
 
-router.post('/forms/make', function (req, res, next) {
+router.post('/forms/make', authenticate, function (req, res, next) {
     generator.generatePDF(req.body);
 });
 
@@ -57,9 +57,16 @@ module.exports = router;
 function authenticate(req, res, next) {
 	if(!req.isAuthenticated()) {
 		req.flash('error', 'Oops! You are not logged in. Please sign up or login to continue.');
-		res.redirect('/');
+		res.redirect('/login');
 	}
 	else {
 		next();
 	}
+}
+
+function makeError(res, message, status) {
+	res.statusCode = status;
+	var error = new Error(message);
+	error.status = status;
+	return error;
 }

@@ -3,7 +3,7 @@ var router = express.Router();
 var Form = require('../models/generatedFormModel');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', authenticateAPI, function(req, res, next) {
 	Form.find({}).sort('-createdAt')
 		.then(function(forms) {
 			res.json({ forms: forms });
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 // SHOW
 // return data for a single Location as JSON
-router.get('/:id', function(req, res, next) {
+router.get('/:id', authenticateAPI, function(req, res, next) {
 	Form.findById(req.params.id)
 		.then(function(form) {
 			if (!form) return next(makeError(res, 'Document not found', 404));
@@ -27,7 +27,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 //CREATE
-router.post('/', function(req, res, next) {
+router.post('/', authenticateAPI, function(req, res, next) {
 	Form.create(req.body)
 		.then(function(savedForm) {
 			res.json({ forms: savedForm });
@@ -39,6 +39,14 @@ router.post('/', function(req, res, next) {
 
 module.exports = router;
 
+function authenticateAPI(req, res, next) {
+	if(!req.isAuthenticated()) {
+		res.redirect(401,'/');
+	}
+	else {
+		next();
+	}
+}
 
 function makeError(res, message, status) {
 	res.statusCode = status;

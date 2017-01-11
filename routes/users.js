@@ -9,18 +9,8 @@ var User = require('../models/userModel');
 //     next();
 // })
 
-function authenticate(req, res, next) {
-    if(!req.isAuthenticated()) {
-        req.flash('error', 'Oops! You are not logged in. Please sign up or login to continue.');
-        res.redirect('/');
-    }
-    else {
-        next();
-    }
-}
-
 /* GET users listing. */
-router.get('/', authenticate, function(req, res, next) {
+router.get('/', authenticateAPI, function(req, res, next) {
   User.find({}).sort('-createdAt')
       .then(function(users) {
         res.json({ users: users });
@@ -30,10 +20,8 @@ router.get('/', authenticate, function(req, res, next) {
       });
 });
 
-
-
 // SHOW
-router.get('/:id', function(req, res, next) {
+router.get('/:id', authenticateAPI, function(req, res, next) {
   User.findById(req.params.id)
       .then(function(user) {
         if (!user) return next(makeError(res, 'Document not found', 404));
@@ -45,7 +33,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 //CREATE
-router.post('/', function(req, res, next) {
+router.post('/', authenticateAPI, function(req, res, next) {
   User.create(req.body)
       .then(function(savedUser) {
         res.json({ user: savedUser });
@@ -55,11 +43,16 @@ router.post('/', function(req, res, next) {
       });
 });
 
-
-
-
 module.exports = router;
 
+function authenticateAPI(req, res, next) {
+    if(!req.isAuthenticated()) {
+        res.redirect(401, '/');
+    }
+    else {
+        next();
+    }
+}
 
 function makeError(res, message, status) {
   res.statusCode = status;
