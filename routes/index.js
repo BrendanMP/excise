@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 
+var generator = require('../pdfGen.js');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -28,6 +30,10 @@ router.post('/login', function (req, res, next) {
     });
 
     return loginStrategy(req,res,next);
-})
+});
+
+router.post('/forms/make', function (req, res, next) {
+    generator.generatePDF(req.body);
+});
 
 module.exports = router;
