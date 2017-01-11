@@ -38,16 +38,6 @@ router.get('/logout', function(req, res){
 	res.redirect('/');
 });
 
-router.get('/user', authenticate, function(req, res, next) {
-    var data = {
-        // id: req.user._id,
-        // email: req.user.local.email,
-        //password: req.user.local.password
-        user: req.user
-    };
-    res.send(data);
-});
-
 router.post('/forms/make', authenticate, function (req, res, next) {
     generator.generatePDF(req.body);
 });

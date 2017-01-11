@@ -9,6 +9,11 @@ var User = require('../models/userModel');
 //     next();
 // })
 
+router.get('/auth', authenticateAPI, function(req, res, next) {
+    var data = req.user;
+    res.send(data);
+});
+
 /* GET users listing. */
 router.get('/', authenticateAPI, function(req, res, next) {
   User.find({}).sort('-createdAt')
