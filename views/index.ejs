@@ -6,9 +6,12 @@
 </head>
 <body ng-app="excise">
     <nav class="navbar navbar-light bg-faded">
-        <div class="container">
+        <div class="container" ng-controller="navCtrl">
             <a class="navbar-brand" href="/">Exciser</a>
             <ul class="nav navbar-nav float-xs-right">
+                <li class="nav-item">
+                    {{navCtrl.user.user.email}}
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" ui-sref="profile">Profile</a>
                 </li>
@@ -18,6 +21,10 @@
                 <li class="nav-item">
                     <a class="nav-link" ui-sref="signup">Create Account</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+
             </ul>
         </div>
     </nav>

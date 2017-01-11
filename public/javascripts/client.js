@@ -39,23 +39,18 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             controllerAs: '$ctrl',
         });
 
-
     $urlRouterProvider.otherwise("/");
     // $locationProvider.html5Mode({ enabled: true, requireBase: false });
 });
 
-//////////////// USER SERVICE //////////////////////
+// //////////////// SERVICES //////////////////////
 app.service('userService', function($http) {
     console.log('userService is alive!');
-    this.login = function() {
-        return $http.get('/login');
-    };
-    this.signup = function(user) {
-        return $http.post('/signup', user);
-    };
+    this.getUser = function () {
+        return $http.get('/user');
+    }
 });
 
-/////////////// LOCATION SERVICE ///////////////////
 app.service('locationService', function ($http) {
     console.log('locationService is alive!');
     this.getLocations = function () {
@@ -67,47 +62,76 @@ app.service('locationService', function ($http) {
     this.addLocation = function (location) {
         return $http.post('/api/locations', location);
     }
-})
-
+});
 
 ////////////// CONTROLLERS ////////////////////////////////////////////////////////
-app.controller('homeCtrl', function() {
-    this.title = 'Welcome to Excise';
-    console.log('home is here');
-});
-
-app.controller('loginCtrl', function() {
-    this.title = 'Login';
-    console.log('login is here');
-});
-
-app.controller('signupCtrl', function($location,userService) {
+app.controller('navCtrl', function (userService) {
     var vm = this;
-    vm.title = 'Sign Up';
+    vm.user = {};
+    userService.getUser()
+        .then(function (res) {
+            vm.user = res.data;
+            console.log(vm.user);
+        })
+        .catch(function (err) {
+            console.log("navCtrl userService error: ",err);
+        })
+})
 
-    vm.signup = function () {
-        console.log('sign up is alive', vm.user);
-        userService.signup(vm.user);
-        $location.url('/dashboard');
-    }
+app.controller('homeCtrl', function() {
+    console.log('home is here');
+    this.title = 'Welcome to Exciser';
 
-    this.place = null;
-    this.autocompleteOptions = {
-        types: ['establishment']
-    }
 });
 
-
-app.controller('loginCtrl', function ($location, userService) {
+app.controller('loginCtrl', function($http,$location) {
+    console.log('login is here');
     var vm = this;
     vm.title = 'Login';
 
     vm.login = function () {
-        console.log('login is alive', vm.user);
-        userService.login(vm.user);
-        $location.url('/dashboard');
+        var url = 'http://localhost:3000/login';
+        var user = vm.user;
+
+        $http.post(url,user)
+            .then(
+                function (res) {
+                    console.log("success!");
+                    $location.path('/profile');
+                },
+                function (res) {
+                    console.log("failure");
+                    $location.path('/');
+                }
+            )
+
     }
-})
+});
+
+app.controller('signupCtrl', function($http,$location) {
+    var vm = this;
+    vm.title = 'Sign Up';
+
+    vm.signup = function () {
+        var url = 'http://localhost:3000/signup';
+        var user = vm.user;
+
+        $http.post(url,user)
+            .then(
+                function (res) {
+                    console.log("success!!");
+                    $location.path("/profile")
+                }, //success
+                function (res) {
+                    console.log('error!');
+                    $location.path('/login');
+                } //error
+            )
+
+    };
+
+    
+});
 
 app.controller('dashboardCtrl', function () {
     var vm = this;
@@ -115,9 +139,21 @@ app.controller('dashboardCtrl', function () {
 
     console.log(vm.user);
 
-})
+});
 
-app.controller('profileCtrl', function() {
-    this.title = 'Profile';
+app.controller('profileCtrl', function(userService) {
+    var vm = this;
+    vm.title = 'Profile';
     console.log('Profile is here');
+
+    vm.user = {};
+
+    userService.getUser()
+        .then(function (res) {
+            vm.user = res.data;
+            //console.log(vm.user);
+        })
+        .catch(function (err) {
+            console.log("profileCtrl userService error: ",err);
+        })
 });
