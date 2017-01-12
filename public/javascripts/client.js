@@ -186,10 +186,16 @@ app.controller('profileCtrl', function(userService) {
 app.controller('FormCtrl', function ($scope, $http, $location) {
 
     $scope.data = {
-        estName: 'Default',
+        estName: 'Jimmys',
         reportMonthYear: '01/2017',
-        grossSales: 0,
+        grossSales: 20000,
+        estAddr1: '1234 Main Street',
+        estAddr2: 'Unit 202',
+        licenseNum: '123412341234',
+        salesTaxID: '123412341234'
     };
+
+
 
     $scope.submitForm = function() {
         $http.post('/forms/make/', JSON.stringify($scope.data))
@@ -198,5 +204,7 @@ app.controller('FormCtrl', function ($scope, $http, $location) {
             ).catch(function (err) {
             console.log(err)
         });
+
+        console.log($scope.data);
     };
 });

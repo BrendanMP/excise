@@ -130,16 +130,6 @@
 
             </form>
 
-
-
-
-
-
-
-
-
-
-
             <h5 class="mt-3 mb-1">Add a Location</h5>
 
             <div class="form-group">
@@ -194,9 +184,6 @@
                 </div>
             </div>
 
-
-
-
             <hr>
             <h5 class="mt-3 mb-1">Locations</h5>
 
@@ -214,45 +201,11 @@
             </div>
             <hr>
 
+            <a class="btn btn-primary btn-block" ui-sref="dashboard">Go To Dashboard</a>
 
 
-            <button class="btn btn-primary btn-block" data-toggle="modal" data-target=".new-location-modal">Add Location</button>
-            <div class="modal fade new-location-modal" id="newPaymentModal">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">New Location</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <form role="form">
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <input type="text" ng-model="data.addr1" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" ng-model="data.addr2" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" ng-model="data.city" class="form-control">
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="submitForm()">Save changes</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
-
 
 <br><br><br><br>

@@ -24,13 +24,20 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="">Select a Location</label>
-                            <select ng-model="data.estName"
-                                    ng-init="data.estName = options[0]"
-                                    class="custom-select form-control">
-                                <option value="Est1" selected="selected">Est1</option>
-                                <option value="Est2">Est2</option>
-                            </select>
-                            <!--<input type="text" class="form-control" ng-model="data.estName" value="Establishment">-->
+                            <!--<select ng-model="data.estName"-->
+                                    <!--ng-init="data.estName = options[0]"-->
+                                    <!--class="custom-select form-control">-->
+                                <!--<option value="Jimmys" selected="selected">Jimmys</option>-->
+                                <!--<option value="Jacks">Jacks</option>-->
+                            <!--</select>-->
+                            <input type="text" class="form-control" ng-model="data.estName">
+                        </div>
+
+                        <div class="d-none">
+                            <input type="text" class="form-control" ng-model="data.estAddr1">
+                            <input type="text" class="form-control" ng-model="data.estAddr2">
+                            <input type="text" class="form-control" ng-model="data.licenseNum">
+                            <input type="text" class="form-control" ng-model="data.licenseNum">
                         </div>
                         <div class="row">
                             <div class="col">
@@ -114,7 +121,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <strong>Location Name</strong>
+            <strong>Jimmys</strong>
         </div>
         <div class="col-md-2">
             12/2016
@@ -124,7 +131,7 @@
         </div>
         <div class="col-md-3">
             <span class="mr-1 text-link" data-toggle="modal" data-target=".edit-payment-modal">Edit</span>
-            <span class="text-link mr-1">View PDF</span>
+            <a href="pdfs/Jimmys_2017-01.pdf" class="text-link mr-1">View PDF</a>
             <div class="modal fade edit-payment-modal">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -135,8 +142,6 @@
                             </button>
                         </div>
                         <div class="modal-body">
-
-
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -152,7 +157,6 @@
                                 </div>
                             </div>
                             <hr>
-
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
