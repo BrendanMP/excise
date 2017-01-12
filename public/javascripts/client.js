@@ -65,9 +65,7 @@ app.service('userService', function ($http) {
     this.updateUser = function () {
         return $http.post('/api/users', id);
     }
-
-
-})
+});
 
 app.service('locationService', function ($http) {
     console.log('locationService is alive!');
@@ -85,18 +83,18 @@ app.service('locationService', function ($http) {
 
 
 ////////////// CONTROLLERS ////////////////////////////////////////////////////////
-app.controller('navCtrl', function (userService) {
+app.controller('navCtrl', function ($scope, userService) {
     var vm = this;
     vm.user = {};
     userService.authUser()
         .then(function (res) {
             vm.user = res.data;
-            console.log(vm.user);
+            console.log(vm.user, 'from navctrl');
         })
         .catch(function (err) {
             console.log("navCtrl userService error: ",err);
-        })
-})
+        });
+});
 
 app.controller('homeCtrl', function() {
     console.log('home is here');
@@ -151,11 +149,17 @@ app.controller('signupCtrl', function($http,$location) {
     };
 });
 
-app.controller('dashboardCtrl', function ($scope, $http) {
+app.controller('dashboardCtrl', function ($scope, userService, $http) {
     var vm = $scope;
     vm.title = 'Dashboard';
-
-    console.log(vm.user);
+    userService.authUser()
+        .then(function (res) {
+            vm.user = res.data;
+            console.log(vm.user, 'from dashboard');
+        })
+        .catch(function (err) {
+            console.log("dashboard userService error: ",err);
+        });
 
 });
 
@@ -164,18 +168,15 @@ app.controller('profileCtrl', function(userService) {
     vm.title = 'Profile';
     console.log('Profile is here');
 
-    vm.user = {
-
-    };
+    vm.user = {};
 
     userService.authUser()
         .then(function (res) {
             vm.user = res.data;
-            //console.log(vm.user);
         })
         .catch(function (err) {
             console.log("profileCtrl userService error: ",err);
-        })
+        });
 
     vm.updateUser = function () {
 
@@ -200,3 +201,4 @@ app.controller('FormCtrl', function ($scope, $http, $location) {
         });
     };
 });
+

@@ -31,6 +31,17 @@
       color: $gray-light;
     }
   }
+  &__cta-well {
+    padding: $spacer*2 0 $spacer*5;
+    .form-inline {
+      display: flex;
+      margin-top: $spacer*2;
+
+      .form-control {
+        flex: 1 1 auto;
+      }
+    }
+  }
   &__footer {
     padding: $spacer*2 0 $spacer*4;
     background: $gray-dark;
