@@ -57,7 +57,7 @@
 			// Now that we have all our calculations, lets build the pdf.
 			doc = new PDF();
 			var pdfName = estName + "_" + moment(reportMonthYear,"MM-YYYY").format('YYYY-MM');
-			doc.pipe(fs.createWriteStream('./pdfs/generatedForms/' + pdfName + '.pdf'));  //creating a write stream
+			doc.pipe(fs.createWriteStream('./public/pdfs/' + pdfName + '.pdf'));  //creating a write stream
 
 
 			doc.image('./pdfs/templates/accAlcoholExcise.jpg', 0,0, {width: 650})
