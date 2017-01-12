@@ -37,6 +37,26 @@
             </div>
         </div>
     </article>
+
+    <article class="homepage__cta-well bg-faded">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3 text-center">
+                    <h1>Find Your Business</h1>
+                    <div class="text-muted">Find your business to get started!</div>
+                    <form role="form" class="form-inline">
+                        <input placeholder="Enter your business name."
+                               class="form-control"
+                               g-places-autocomplete
+                               ng-model="place"
+                               ng-value="place.name"/>
+                        <button class="btn btn-primary">Get Started</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </article>
+
     <footer class="homepage__footer">
         <div class="container">
             <div class="row">
