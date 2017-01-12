@@ -5715,6 +5715,26 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 .custom-prediction-label {
   font-style: italic; }
 
+.ex-navbar {
+  background: #eceeef;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 0; }
+  .ex-navbar__brand {
+    font-size: 120%;
+    font-weight: 500;
+    line-height: 3rem; }
+  .ex-navbar__nav {
+    list-style-type: none;
+    padding: 0 0.5rem 0 0;
+    margin: 0; }
+    .ex-navbar__nav > li {
+      display: inline-block; }
+    .ex-navbar__nav a {
+      line-height: 3rem;
+      padding: 0 0.5rem; }
+
 .homepage__hero {
   display: flex;
   align-items: center;
@@ -5743,6 +5763,14 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     font-size: 0.875rem;
     color: #818a91; }
 
+.homepage__cta-well {
+  padding: 2rem 0 5rem; }
+  .homepage__cta-well .form-inline {
+    display: flex;
+    margin-top: 2rem; }
+    .homepage__cta-well .form-inline .form-control {
+      flex: 1 1 auto; }
+
 .homepage__footer {
   padding: 2rem 0 4rem;
   background: #373a3c;
@@ -5763,12 +5791,11 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     max-width: 35rem; }
 
 .navbar-brand {
-  flex-grow: 0 !important;
   display: inline-block; }
 
 .navbar-toggler {
   border: 0;
-  padding: 0; }
+  padding-top: 0.25rem; }
 
 h1 {
   margin-top: 2rem; }
@@ -5793,5 +5820,8 @@ label {
   cursor: pointer; }
   .text-link:hover {
     color: #0267bf; }
+
+.navbar-collapse {
+  justify-content: flex-end; }
 
 /*# sourceMappingURL=style.css.map */

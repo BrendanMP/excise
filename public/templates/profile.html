@@ -1,32 +1,85 @@
-<div class="row">
-    <div class="col-md-6 offset-md-3">
-        <h1>{{ $ctrl.title }}</h1>
-        <hr>
-        <h5 class="mb-1">Contact</h5>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1>{{ $ctrl.title }}</h1>
+            <hr>
+            <h5 class="mb-1">Contact</h5>
 
-        <form id="user-form" ng-submit="$ctrl.updateUser()">
-            <input type="hidden" ng-model="$ctrl.user._id">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="profileFirstName">First Name</label>
-                        <input type="text" id="profileFirstName" class="form-control" placeholder="First Name" ng-model="$ctrl.user.firstName">
+            <form id="user-form" ng-submit="$ctrl.update()">
+                <input type="text" ng-model="$ctrl.user._id">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="profileFirstName">First Name</label>
+                            <input type="text" id="profileFirstName" class="form-control" placeholder="First Name" ng-model="$ctrl.user.firstName">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="profileLastName">Last Name</label>
+                            <input type="text" id="profileLastName" class="form-control" placeholder="Last Name" ng-model="$ctrl.user.lastName">
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="profileLastName">Last Name</label>
-                        <input type="text" id="profileLastName" class="form-control" placeholder="Last Name" ng-model="$ctrl.user.lastName">
+
+                <div class="form-group">
+                    <label for="profileEmail">Email Address</label>
+                    <input type="email" id="profileEmail" class="form-control" placeholder="Email Address" ng-model="$ctrl.user.local.email">
+                </div>
+
+                <h5 class="mt-3 mb-1">Filing As</h5>
+
+                <div class="form-group">
+                    <label for="entityName">Entity Name</label>
+                    <input type="text" id="entityName" class="form-control" placeholder="Example, LLC">
+                </div>
+
+                <div class="form-group">
+                    <label for="entityAddr1">Entity Address</label>
+                    <input type="text" id="entityAddr1" class="form-control" placeholder="Address 1">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="entityAddr2" class="form-control"
+                           placeholder="Address 2">
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="entityState">State</label>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown button
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="entityZip">Zip Code</label>
+                            <input type="text" id="entityZip" class="form-control" placeholder="Zip">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="profileEmail">Email Address</label>
-                <input type="email" id="profileEmail" class="form-control" placeholder="Email Address" ng-model="$ctrl.user.local.email">
-            </div>
+                <div class="form-group">
+                    <label for="entityEin">EIN</label>
+                    <input type="text" id="entityEin" class="form-control" placeholder="12341234">
+                </div>
 
-            <h5 class="mt-3 mb-1">Filing As</h5>
+                <div class="form-group">
+                    <input type="submit" id="user-form-submit" class="btn btn-block btn-primary" value="Save">
+                </div>
+
+            </form>
+
+
 
             <div class="form-group">
                 <label for="entityName">Entity Name</label>
@@ -112,58 +165,124 @@
                     <div class="form-group">
                         <label for="entityZip">Zip Code</label>
                         <input type="text" id="entityZip" class="form-control" placeholder="Zip" ng-model="$ctrl.user.entityZip">
+
+
+            <h5 class="mt-3 mb-1">Add a Location</h5>
+
+            <div class="form-group">
+                <input placeholder="Enter your business name."
+                       class="form-control modal-places-search"
+                       g-places-autocomplete
+                       ng-model="place"
+                       ng-value="place.name"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-block btn-primary" data-toggle="modal" data-target=".new-location-modal">Add Location</button>
+            </div>
+
+            <div class="modal fade new-location-modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">New Location</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">Busines Name</label>
+                                <input class="form-control" placeholder="Business Name" value="{{ place.name }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Busines Address</label>
+                                <input class="form-control" placeholder="Business Address"
+                                       value="{{place.formatted_address}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">County</label>
+                                <div ng-repeat="field in place.address_components | filter:{types: 'administrative_area_level_2'}">
+                                    <input class="form-control" placeholder="County" value="{{field.long_name}}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit"
+                                    class="btn btn-primary"
+                                    data-dismiss="modal" ng-click="submitNewLocation()">Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
+
 
             <div class="form-group">
                 <label for="entityEin">EIN</label>
                 <input type="text" id="entityEin" class="form-control" ng-model="$ctrl.user.entityFEIN">
             </div>
 
-            <div class="form-group">
-                <input type="submit" id="user-form-submit" class="form-control btn btn-primary" value="Save">
-            </div>
+            <hr>
+            <h5 class="mt-3 mb-1">Locations</h5>
 
-        </form>
-
-
-
-        <h5 class="mt-3 mb-1">Locations</h5>
-
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-block">
-                        <h5 class="card-title">Location 1</h5>
-                        <address class="mb-2">
-                            Location Address 1 <br>
-                            Location Address 2 <br>
-                            Location Phone
-                        </address>
-                        <button class="btn btn-sm btn-secondary">Edit</button>
-                        <button class="btn btn-sm btn-danger">Remove</button>
-                    </div>
+            <div class="card">
+                <div class="card-block">
+                    <h5 class="card-title">Location 1</h5>
+                    <address class="mb-2">
+                        Location Address 1 <br>
+                        Location Address 2 <br>
+                        Location Phone
+                    </address>
+                    <button class="btn btn-sm btn-secondary">Edit</button>
+                    <button class="btn btn-sm btn-danger">Remove</button>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-block">
-                        <h5 class="card-title">Location 2</h5>
-                        <address class="mb-2">
-                            Location Address 1 <br>
-                            Location Address 2 <br>
-                            Location Phone
-                        </address>
-                        <button class="btn btn-sm btn-secondary">Edit</button>
-                        <button class="btn btn-sm btn-danger">Remove</button>
+            <hr>
+
+
+
+            <button class="btn btn-primary btn-block" data-toggle="modal" data-target=".new-location-modal">Add Location</button>
+            <div class="modal fade new-location-modal" id="newPaymentModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">New Location</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form role="form">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <input type="text" ng-model="data.addr1" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" ng-model="data.addr2" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" ng-model="data.city" class="form-control">
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="submitForm()">Save changes</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
-        <button class="btn btn-primary ">Add Location</button>
     </div>
 </div>
+
 
 <br><br><br><br>
